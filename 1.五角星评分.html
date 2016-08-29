@@ -1,0 +1,69 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>五角星评分案例</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .comment {
+            font-size: 40px;
+            color: teal;
+        }
+
+        .comment li {
+            float: left;
+        }
+
+        ul {
+            list-style: none;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            //定义变量
+            var wjx_k = "☆";
+            var wjx_s = "★";
+            //1.鼠标移动li上面，当前的li变为实心的
+            $("li").mouseenter(function () {
+                //让当前的以及之前的所有的都变为实心五角星,链式到当前获取到的就是前面几个五角星，不是JQ对象，所以不能再继续链式编程
+                $(this).text(wjx_s).prevAll().text(wjx_s);
+                //让当前的后的变为空心五角星
+                $(this).nextAll().text(wjx_k);
+            });
+            //2.鼠标离开ul后，所有的五角星变为空心
+            $(".comment").mouseleave(function () {
+                //所有的li变为空心
+                $("li").text(wjx_k);
+                //4.让点击的这个以及之前的变为空心
+                $("li.active").text(wjx_s).prevAll().text(wjx_s);
+            });
+            //3.点击li的时候，让当前的li变为实心
+            $("li").click(function () {
+                //让当前的li添加一个标记，并且变为实心☆，让其他的变为空心☆。
+                $(this).addClass("active").siblings().removeClass("active");
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+<ul class="comment">
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+</ul>
+</body>
+
+</html>
